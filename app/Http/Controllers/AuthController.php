@@ -22,7 +22,7 @@ class AuthController extends Controller
       $request->validated($request->all());
 
       if (!Auth::attempt($request->only(['email', 'password']))) {
-        return $this->error("[]", 'Email or password is not correct', 401);
+          return $this->error("[]", 'Email or password is not correct', 401);
       }
 
       $user = User::where('email', $request->input('email'))->first();

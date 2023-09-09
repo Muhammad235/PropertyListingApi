@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Enums\ListingTypeEnum;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -15,7 +16,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('broker_id');
             $table->string('address');
-            $table->enum('listing_type');
+            $table->enum('listing_type', [
+                ListingTypeEnum::OPEN->value,
+                ListingTypeEnum::SELL->value,
+                ListingTypeEnum::EXECUTIVE->value,
+                ListingTypeEnum::NET->value,
+            ])->default(ListingTypeEnum::OPEN->value);
+
             $table->string('city');
             $table->string('zip_code');
             $table->string('description');
@@ -23,10 +30,13 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('broker_id')
-            ->reference('id')
-            ->on()
-
+            ->references('id')
+            ->on('brokers')
+            ->cascadeOnDelete();
             ;
+
+
+            $table->unique('address', 'zip_code');
 
 
         });
