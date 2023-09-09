@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('logo_path')->required();
             $table->timestamps();
 
-
             $table->unique(['name', 'zip_code', 'phone_number']);
 
         });
