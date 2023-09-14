@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Brokers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,6 +15,8 @@ class PropertiesResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $broker = Brokers::find($this->broker_id);
+
         return [
             'id' => (string) $this->id,
             'attributes' => [
@@ -28,6 +31,12 @@ class PropertiesResource extends JsonResource
 
             'characteristics' => [
                 new PropertyCharacteristicsResource($this->characteristic)
+            ],
+
+            "broker" => [
+                'name' => $broker->name,
+                'address' => $broker->address,
+                'phone_number' => $broker->phone_number,
             ]
         ];
     }

@@ -9,6 +9,6 @@ class PropertyCharacteristics extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['property_id', 'price','bedrooms', 'sqrt', 'price_sqrt', 'property_type', 'status'
+    protected $fillable = ['property_id', 'price','bedrooms', 'sqrt', 'price_sqrt', 'property_type', 'bathrooms', 'status'
     ];
 }

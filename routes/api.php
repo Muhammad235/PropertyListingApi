@@ -27,7 +27,7 @@ Route::post('/register' , [AuthController::class, 'register']);
 Route::get('/brokers' , [BrokersController::class, 'index']);
 Route::get('/brokers/{broker}' , [BrokersController::class, 'show']);
 
-Route::apiResource('/properties' , PropertiesController::class);
+Route::apiResource('/properties', PropertiesController::class);
 
 
 //protected route
