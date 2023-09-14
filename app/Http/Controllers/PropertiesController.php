@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Property;
+use App\Http\Resources\PropertiesResource;
 
 class PropertiesController extends Controller
 {
@@ -11,16 +13,9 @@ class PropertiesController extends Controller
      */
     public function index()
     {
-        //
+         return PropertiesResource::collection(Property::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.

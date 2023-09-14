@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrokersController;
+use App\Http\Controllers\PropertiesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::post('/register' , [AuthController::class, 'register']);
 
 Route::get('/brokers' , [BrokersController::class, 'index']);
 Route::get('/brokers/{broker}' , [BrokersController::class, 'show']);
+
+Route::apiResource('/properties' , PropertiesController::class);
 
 
 //protected route
