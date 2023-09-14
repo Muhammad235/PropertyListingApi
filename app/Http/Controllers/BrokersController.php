@@ -40,7 +40,6 @@ class BrokersController extends Controller
             'zip_code' => $request->name,
             'phone_number' => $request->zip_code,
             'logo_path' => $request->logo_path
-
         ]);
 
         return new BrokersResource($broker);
