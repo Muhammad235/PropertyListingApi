@@ -23,11 +23,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login' , [AuthController::class, 'login']);
 Route::post('/register' , [AuthController::class, 'register']);
 
-Route::apiResource('/brokers' , BrokersController::class);
+Route::get('/brokers' , [BrokersController::class, 'index']);
+Route::get('/brokers/{broker}' , [BrokersController::class, 'show']);
+
 
 //protected route
 
 Route::group(['middleware' => ['auth:sanctum']], function() {
+    Route::apiResource('/brokers' , BrokersController::class)->only(['store', 'update', 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
