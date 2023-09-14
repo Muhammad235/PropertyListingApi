@@ -53,39 +53,48 @@ class PropertiesController extends Controller
        $newProperty = new PropertiesResource($property);
 
         return $this->success([
-            "property details" => $newProperty,
+             $newProperty,
           ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Property $property)
     {
-        //
-    }
+        $allProperty = new PropertiesResource($property);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        return $this->success([
+             $allProperty,
+          ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Property $property)
     {
-        //
+        $property->update($request->only([
+            'name', 'address', 'listing_type', 'city', 'zip_code', 'description', 'build_year'
+       ]));
+
+       $property->characteristic()->where('property_id', $property->id)->update($request->only(['property_id', 'price', 'bedrooms', 'bathrooms', 'sqrt', 'price_sqrt', 'property_type', 'status']));
+
+       return $this->success([
+        "message" => "property updated successfully"
+       ]);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Property $id)
     {
-        //
+        Property::delete();
+
+       return $this->success([
+        "message" => "Property deleted successfully"
+    ]);
     }
 }
