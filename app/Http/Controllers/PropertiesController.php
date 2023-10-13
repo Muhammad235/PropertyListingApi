@@ -19,6 +19,7 @@ class PropertiesController extends Controller
     public function index()
     {
          return PropertiesResource::collection(Property::all());
+
     }
 
 
